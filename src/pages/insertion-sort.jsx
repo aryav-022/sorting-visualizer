@@ -3,21 +3,21 @@ import delay from "@/functions/delay";
 import swap from "@/functions/swap";
 import copyToClipboard from "@/hooks/copyToClipboard";
 
-const code = `function bubbleSort(arr) {
-    let swapped = true;
-    while (swapped) {
-        swapped = false;
-        for (let i = 0; i < arr.length - 1; i++) {
-            if (arr[i + 1] < arr[i]) {
-                [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-                swapped = true;
-            }
+const code = `function insertionSort(arr) {
+    for (let i = 1; i < arr.length; i++) {
+        let j = i - 1;
+        let key = arr[i];
+        
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            j--;
         }
+        
+        arr[j + 1] = key;
     }
-    return arr;
 }`;
 
-export default function BubbleSort() {
+export default function InsertionSort() {
 	const copyIndicator = useRef(null);
 	const barsRef = useRef(null);
 	const elementsInputRef = useRef(null);
@@ -33,8 +33,8 @@ export default function BubbleSort() {
 	const disableControls = () => {
 		Array.from(buttonsRef.current.children).forEach((button) => {
 			button.disabled = true;
-			button.classList.add("bg-gray-400");
-			button.classList.add("hover:bg-gray-400");
+            button.classList.add("bg-gray-400");
+            button.classList.add("hover:bg-gray-400");
 		});
 	};
 
@@ -68,49 +68,86 @@ export default function BubbleSort() {
 		enableControls();
 	};
 
-	async function bubbleSortVisualizer() {
-		const bars = Array.from(barsRef.current.children);
+	// async function insertionSortVisualizer() {
+	// 	const bars = Array.from(barsRef.current.children);
 
-        let swapped = true;
-        let size = bars.length;
+    //     for (let i = 1; i < bars.length; i++) {
+    //         let j = i - 1;
+    //         const key = parseInt(bars[i].innerText);
+    //         let value1 = parseInt(bars[j].innerText);
 
-        while (swapped) {
-            swapped = false;
-            for (let i = 0; i < size - 1; i++) {
+    //         while (j >= 0 && value1 > key) {
+    //             // Change the color of the bars being compared
+    //             bars[j].classList.add("bg-orange-400");
+    //             bars[j + 1].classList.add("bg-orange-400");
+
+    //             // Swap the bars
+    //             swap(j, j + 1, bars);
+
+    //             // Remove the color of the bars being compared
+    //             bars[j].classList.remove("bg-orange-400");
+    //             bars[j + 1].classList.remove("bg-orange-400");
+
+    //             j--;
+    //         }
+
+    //         bars[j + 1] = bars[i];
+
+
+    //         // Change the color of the bars being compared
+    //         bars[i].classList.add("bg-orange-400");
+    //         bars[j + 1].classList.add("bg-orange-400");
+
+    //         // Swap the bars
+    //         swap(i, j + 1, bars);
+
+    //         // Remove the color of the bars being compared
+    //         bars[i].classList.remove("bg-orange-400");
+    //         bars[j + 1].classList.remove("bg-orange-400");
+
+    //         await delay(2000);
+    //     }
+	// }
+
+    async function insertionSortVisualizer() {
+        const bars = Array.from(barsRef.current.children);
+
+        bars[0].classList.add("bg-green-400");
+
+        await delay(2000);
+
+        for (let i = 1; i < bars.length; i++) {
+            let j = i - 1;
+            const key = parseInt(bars[i].innerText);
+            let value1 = parseInt(bars[j].innerText);
+
+            while (j >= 0 && value1 > key) {
                 // Change the color of the bars being compared
-                bars[i].classList.add("bg-orange-400");
-                bars[i + 1].classList.add("bg-orange-400");
+                bars[j].classList.add("bg-orange-400");
+                bars[j + 1].classList.add("bg-orange-400");
+
+                // Swap the bars
+                swap(j, j + 1, bars);
 
                 await delay(2000);
 
-				const value1 = parseInt(bars[i + 1].textContent);
-				const value2 = parseInt(bars[i].textContent);
+                // Remove the color of the bars being compared
+                bars[j].classList.remove("bg-orange-400");
+                bars[j + 1].classList.remove("bg-orange-400");
 
-                if (value1 < value2) {
-                    swap(i, i + 1, bars);
+                j--;
+                value1 = parseInt(bars[j].innerText);
 
-                    await delay(2000);
-
-                    swapped = true;
-                }
-
-                // Change the color of the bars being compared
-                bars[i].classList.remove("bg-orange-400");
-                bars[i + 1].classList.remove("bg-orange-400");
-            }
-
-            size--;
-            
-            if (swapped) {
-                // Change the color of the sorted bar
-                bars[size].classList.add("bg-green-400");
                 await delay(2000);
             }
+
+            // Change the color of sorted bar
+            bars[j + 1].classList.add("bg-green-400");
+
+            await delay(2000);
         }
-
-        // Change the color of the sorted bar
-        bars.forEach((bar) => bar.classList.add("bg-green-400"));
-	}
+    }
+    
 
 	useEffect(() => {
 		const bars = barsRef.current.children;
@@ -140,30 +177,28 @@ export default function BubbleSort() {
 	return (
 		<>
 			{/* General Information */}
-			<h1 className={`text-4xl font-bold`}>Bubble Sort</h1>
+			<h1 className={`text-4xl font-bold`}>Insertion Sort</h1>
 			<p className={`text-lg`}>
-				Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps
-				through the list, compares adjacent elements and swaps them if they are in the wrong order. This is
-				repeated until the list is sorted.
+                Insertion sort is a sorting algorithm that places an unsorted element at its suitable place in each iteration.
 			</p>
 			<p className={`text-lg`}>
-				Bubble sort has a worst-case and average complexity of O(n<sup>2</sup>), where n is the number of items
-				being sorted. Most practical sorting algorithms have substantially better worst-case or average
-				complexity, often O(n log n). Even other O(n<sup>2</sup>) sorting algorithms, such as insertion sort,
-				generally run faster than bubble sort, and are no more complex. Therefore, bubble sort is not a
-				practical sorting algorithm.
+                It is similar to the way we sort playing cards in our hands.
+                We start with an empty left hand and the cards face down on the table.
+                We then remove one card at a time from the table and insert it into the correct position in the left hand.
+                To find the correct position for a card, we compare it with each of the cards already in the hand, from right to left.
+                At all times, the cards held in the left hand are sorted, and these cards were originally the top cards of the pile on the table.
 			</p>
 			<h2 className={`text-2xl font-bold`}>Time Complexity</h2>
 			<div>
 				Worst-case:{" "}
 				<code className="px-2 py-[6px] bg-white bg-opacity-20 rounded-lg">
-					O(n<sup>2</sup>)
+                    O(n<sup>2</sup>)
 				</code>
 			</div>
 			<div>
 				Average-case:{" "}
 				<code className="px-2 py-[6px] bg-white bg-opacity-20 rounded-lg">
-					O(n<sup>2</sup>)
+                    O(n<sup>2</sup>)
 				</code>
 			</div>
 
@@ -237,19 +272,21 @@ export default function BubbleSort() {
 				<button
 					className={`bg-slate-800 text-white px-4 py-2 hover:bg-slate-700`}
 					id="bubble-sort-btn"
-					onClick={() => start(bubbleSortVisualizer)}
+					onClick={() => start(insertionSortVisualizer)}
 				>
 					Start
 				</button>
 				<button
 					className={`bg-slate-800 text-white px-4 py-2 border-l border-slate-600 hover:bg-slate-700`}
 					id="bubble-sort-btn"
+                    disabled
 				>
 					Prev
 				</button>
 				<button
 					className={`bg-slate-800 text-white px-4 py-2 border-l border-r border-slate-600 hover:bg-slate-700`}
 					id="bubble-sort-btn"
+                    disabled
 				>
 					Next
 				</button>
