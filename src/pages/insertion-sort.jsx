@@ -68,47 +68,6 @@ export default function InsertionSort() {
 		enableControls();
 	};
 
-	// async function insertionSortVisualizer() {
-	// 	const bars = Array.from(barsRef.current.children);
-
-    //     for (let i = 1; i < bars.length; i++) {
-    //         let j = i - 1;
-    //         const key = parseInt(bars[i].innerText);
-    //         let value1 = parseInt(bars[j].innerText);
-
-    //         while (j >= 0 && value1 > key) {
-    //             // Change the color of the bars being compared
-    //             bars[j].classList.add("bg-orange-400");
-    //             bars[j + 1].classList.add("bg-orange-400");
-
-    //             // Swap the bars
-    //             swap(j, j + 1, bars);
-
-    //             // Remove the color of the bars being compared
-    //             bars[j].classList.remove("bg-orange-400");
-    //             bars[j + 1].classList.remove("bg-orange-400");
-
-    //             j--;
-    //         }
-
-    //         bars[j + 1] = bars[i];
-
-
-    //         // Change the color of the bars being compared
-    //         bars[i].classList.add("bg-orange-400");
-    //         bars[j + 1].classList.add("bg-orange-400");
-
-    //         // Swap the bars
-    //         swap(i, j + 1, bars);
-
-    //         // Remove the color of the bars being compared
-    //         bars[i].classList.remove("bg-orange-400");
-    //         bars[j + 1].classList.remove("bg-orange-400");
-
-    //         await delay(2000);
-    //     }
-	// }
-
     async function insertionSortVisualizer() {
         const bars = Array.from(barsRef.current.children);
 
@@ -118,13 +77,19 @@ export default function InsertionSort() {
 
         for (let i = 1; i < bars.length; i++) {
             let j = i - 1;
-            const key = parseInt(bars[i].innerText);
-            let value1 = parseInt(bars[j].innerText);
+            const key = parseInt(bars[i].textContent);
+            let value1 = parseInt(bars[j].textContent);
 
             while (j >= 0 && value1 > key) {
+				if (j - 1 >= 0) {
+					value1 = parseInt(bars[j - 1].textContent);
+				}
+
                 // Change the color of the bars being compared
                 bars[j].classList.add("bg-orange-400");
                 bars[j + 1].classList.add("bg-orange-400");
+
+				await delay(2000);
 
                 // Swap the bars
                 swap(j, j + 1, bars);
@@ -136,7 +101,6 @@ export default function InsertionSort() {
                 bars[j + 1].classList.remove("bg-orange-400");
 
                 j--;
-                value1 = parseInt(bars[j].innerText);
 
                 await delay(2000);
             }
