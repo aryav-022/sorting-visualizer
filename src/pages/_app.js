@@ -8,7 +8,7 @@ export default function App({ Component, pageProps }) {
   return (
     <main className={`flex min-h-screen ${inter.className}`}>
       <Sidebar />
-      <main className={`flex flex-col w-[max(75%,calc(100vw-320px))] p-8 gap-4 ml-[min(25%,320px)]`}>
+      <main className={`flex flex-col w-[max(75%,calc(100vw-320px))] p-8 gap-4 ml-[min(25%,320px)] max-lg:w-screen max-lg:ml-0`}>
         <Component {...pageProps} />
       </main>
 		</main>
