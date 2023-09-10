@@ -9,6 +9,7 @@ const Graph = forwardRef(({ arr, gridOn }, { barsRef, formatRef }) => {
 
 		// Assuming format is Array, update grid
 		gridRef.current.style.backgroundSize = `4rem 4rem`;
+		
 
 		// If the format is Array, then we don't need to do any calculations		
 		if (formatRef.current.value === "Array") return;
@@ -48,7 +49,7 @@ const Graph = forwardRef(({ arr, gridOn }, { barsRef, formatRef }) => {
 	}, [gridOn]);
 
 	return (
-		<div className={`flex justify-center items-center`}>
+		<div className={`flex justify-center items-center max-sm:scale-50`}>
 			<div className={`relative flex justify-center items-center p-8 bg-white rounded-lg text-black`}>
 				<div className="flex absolute left-8 top-8 h-96 w-[calc(100%-4rem)] overflow-hidden gap-0 flex-wrap border border-black border-opacity-10 grid-background" ref={gridRef}></div>
 				<div className="flex h-96 items-center" ref={barsRef}>
