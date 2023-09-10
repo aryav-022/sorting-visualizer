@@ -6,9 +6,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }) {
   return (
-    <main className={`flex min-h-screen ${inter.className}`}>
+    <main className={`flex min-h-screen ${inter.className} max-lg:flex-col`}>
       <Sidebar />
-      <main className={`flex flex-col w-[max(75%,calc(100vw-320px))] p-8 gap-4 ml-[min(25%,320px)] max-lg:w-screen max-lg:ml-0`}>
+      <main className={`flex flex-col w-3/4 ml-[25%] p-8 gap-4 max-lg:w-screen max-lg:ml-0`}>
         <Component {...pageProps} />
       </main>
 		</main>
