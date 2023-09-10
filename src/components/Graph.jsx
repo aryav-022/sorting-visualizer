@@ -77,4 +77,6 @@ const Graph = forwardRef(({ arr, gridOn }, { barsRef, formatRef }) => {
 	);
 })
 
+Graph.displayName = "Graph";
+
 export default Graph;
