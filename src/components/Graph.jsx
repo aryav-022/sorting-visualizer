@@ -37,7 +37,7 @@ const Graph = forwardRef(({ arr, gridOn }, { barsRef, formatRef }) => {
 
 		// Update the grid
 		gridRef.current.style.backgroundSize = `4rem ${Math.max(16, factor)}px`;
-	}, [arr]);
+	}, [arr, barsRef, formatRef]);
 
 	useEffect(() => {
 		if (gridOn) {
