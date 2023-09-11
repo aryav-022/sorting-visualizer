@@ -127,7 +127,7 @@ export default function Visualizer({ visualizerFunction }) {
 
 					<input
 						type="checkbox"
-						className="invisible relative before:inline-block before:visible before:w-[52px] before:h-8 before:rounded-3xl before:cursor-pointer before:bg-slate-700 checked:before:bg-blue-500 after:absolute after:top-[3px] after:left-[3px] after:inline-block after:visible after:w-[26px] after:h-[26px] after:rounded-full after:cursor-pointer after:bg-white after:transition-transform after:duration-300 after:ease-in-out checked:after:translate-x-5"
+						className="invisible relative before:inline-block before:visible before:w-[52px] before:h-8 before:rounded-3xl before:cursor-pointer before:bg-slate-700 checked:before:bg-blue-500 focus:before:outline focus:before:outline-blue-700 after:absolute after:top-[3px] after:left-[3px] after:inline-block after:visible after:w-[26px] after:h-[26px] after:rounded-full after:cursor-pointer after:bg-white after:transition-transform after:duration-300 after:ease-in-out checked:after:translate-x-5"
 						onChange={() => setGridOn((prev) => !prev)}
 						defaultChecked={gridOn}
 					/>
