@@ -125,16 +125,12 @@ export default function Visualizer({ visualizerFunction }) {
 						Grid On/Off
 					</label>
 
-					<label className="relative inline-flex items-center cursor-pointer">
-						<input
-							type="checkbox"
-							value=""
-							className="sr-only peer"
-							onChange={() => setGridOn((prev) => !prev)}
-							defaultChecked={gridOn}
-						/>
-						<div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-					</label>
+					<input
+						type="checkbox"
+						className="invisible relative before:inline-block before:visible before:w-[52px] before:h-8 before:rounded-3xl before:cursor-pointer before:bg-slate-700 checked:before:bg-blue-500 after:absolute after:top-[3px] after:left-[3px] after:inline-block after:visible after:w-[26px] after:h-[26px] after:rounded-full after:cursor-pointer after:bg-white after:transition-transform after:duration-300 after:ease-in-out checked:after:translate-x-5"
+						onChange={() => setGridOn((prev) => !prev)}
+						defaultChecked={gridOn}
+					/>
 				</div>
 			</div>
 
